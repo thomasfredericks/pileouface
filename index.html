@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
     coin.className = ''; // Removes all classes
 
-  
+    setTimeout(function () {
 		const flipResult = Math.random();
       if (flipResult < 0.5) {
 		if ( previousFlipResult < 0.5 ) {
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
       }
 	  previousFlipResult = flipResult;
- 
+    }, 100);
   });
 });
 
