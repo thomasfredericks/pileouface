@@ -66,12 +66,34 @@ h1{
        animation: flipTails 3s ease-out forwards;
 }
 
+#coin.headsB {
+  -webkit-animation: flipHeadsB 3s ease-out forwards;
+  -moz-animation: flipHeadsB 3s ease-out forwards;
+    -o-animation: flipHeadsB 3s ease-out forwards;
+       animation: flipHeadsB 3s ease-out forwards;
+}
+#coin.tailsB {
+  -webkit-animation: flipTailsB 3s ease-out forwards;
+  -moz-animation: flipTailsB 3s ease-out forwards;
+    -o-animation: flipTailsB 3s ease-out forwards;
+       animation: flipTailsB 3s ease-out forwards;
+}
+
 @-webkit-keyframes flipHeads {
   from { -webkit-transform: rotateY(0); -moz-transform: rotateY(0); transform: rotateY(0); }
   to { -webkit-transform: rotateY(1800deg); -moz-transform: rotateY(1800deg); transform: rotateY(1800deg); }
 }
 @-webkit-keyframes flipTails {
   from { -webkit-transform: rotateY(0); -moz-transform: rotateY(0); transform: rotateY(0); }
+  to { -webkit-transform: rotateY(1980deg); -moz-transform: rotateY(1980deg); transform: rotateY(1980deg); }
+}
+
+@-webkit-keyframes flipHeadsB {
+  from { -webkit-transform: rotateY(180deg); -moz-transform: rotateY(180deg); transform: rotateY(180deg); }
+  to { -webkit-transform: rotateY(1800deg); -moz-transform: rotateY(1800deg); transform: rotateY(1800deg); }
+}
+@-webkit-keyframes flipTailsB {
+  from { -webkit-transform: rotateY(180deg); -moz-transform: rotateY(180deg); transform: rotateY(180deg); }
   to { -webkit-transform: rotateY(1980deg); -moz-transform: rotateY(1980deg); transform: rotateY(1980deg); }
 }
 
@@ -83,32 +105,50 @@ h1{
   
 <div id="coin">
   <div class="side-a">
-  <img src="pile.jpg">
+  <img src="face.jpg">
   </div>
   <div class="side-b">
-  <img src="face.jpg">
+  <img src="pile.jpg">
+  
   </div>
   
 </div>
 
 
 <script>
+let previousFlipResult = 0;
 document.addEventListener('DOMContentLoaded', function () {
   const coin = document.getElementById('coin');
 
   coin.addEventListener('click', function () {
-    const flipResult = Math.random();
+    
+	
     coin.className = ''; // Removes all classes
 
-    setTimeout(function () {
-      if (flipResult <= 0.5) {
-        coin.classList.add('heads');
-        console.log('it is head');
+  
+		const flipResult = Math.random();
+      if (flipResult < 0.5) {
+		if ( previousFlipResult < 0.5 ) {
+			coin.classList.add('heads');
+			console.log('heads to heads');
+		} else {
+			coin.classList.add('headsB');
+			console.log('tails to heads');
+		}
+        
+        
       } else {
-        coin.classList.add('tails');
-        console.log('it is tails');
+	  if ( previousFlipResult < 0.5 ) {
+			coin.classList.add('tails');
+			console.log('heads to tails');
+		} else {
+			coin.classList.add('tailsB');
+			console.log('tails to tails');
+		}
+        
       }
-    }, 100);
+	  previousFlipResult = flipResult;
+ 
   });
 });
 
