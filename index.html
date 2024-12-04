@@ -66,6 +66,10 @@ h1{
        animation: flipTails 3s ease-out forwards;
 }
 
+#coin.backside {
+	-webkit-transform: rotateY(-180deg);
+} 
+
 #coin.headsB {
   -webkit-animation: flipHeadsB 3s ease-out forwards;
   -moz-animation: flipHeadsB 3s ease-out forwards;
@@ -122,11 +126,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   coin.addEventListener('click', function () {
     
+	const flipResult = Math.random();
 	
-    coin.className = ''; // Removes all classes
+			if ( previousFlipResult < 0.5 ) {
+			coin.className = ''; // Removes all classes
+		} else {
+			coin.className = 'backside'; // Removes all classes
+		}
+    
+	setTimeout(function () {
 
-    setTimeout(function () {
-		const flipResult = Math.random();
+		
+		
+
+		
       if (flipResult < 0.5) {
 		if ( previousFlipResult < 0.5 ) {
 			coin.classList.add('heads');
